@@ -12,8 +12,16 @@ Please see our [gulpfile](gulpfile.js) for up to date information on what we sup
 * CSS Autoprefixing
 * Built-in preview server with BrowserSync
 * Automagically compile Sass with [libsass](http://libsass.org)
-* Map compiled CSS to source stylesheets with source maps (optional)
+* Map compiled CSS to source stylesheets with source maps
 * Image optimization
+
+## What plugins are connected in stock
+* [Device.js](https://github.com/matthewhudson/device.js)
+* [fancyBox v3](https://github.com/fancyapps/fancybox)
+* [jQuery Form Styler](http://dimox.name/jquery-form-styler/)
+* [jQuery Validation Plugin](https://jqueryvalidation.org/)
+* [MASKED INPUT PLUGIN](http://digitalbush.com/projects/masked-input-plugin/)
+* [Slick slider](https://github.com/kenwheeler/slick/)
 
 ## Getting Started
 

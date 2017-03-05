@@ -16,14 +16,14 @@ gulp.task('styles', () => {
   return gulp.src('src/styles/*.scss')
     .pipe(cache())
     .pipe($.plumber())
-    //.pipe($.if(dev, $.sourcemaps.init()))
+    .pipe($.if(dev, $.sourcemaps.init()))
     .pipe($.sass.sync({
       outputStyle: 'expanded',
       precision: 10,
       includePaths: ['.']
     }).on('error', $.sass.logError))
     .pipe($.autoprefixer({browsers: ['> 1%', 'last 2 versions', 'Firefox ESR']}))
-    //.pipe($.if(dev, $.sourcemaps.write()))
+    .pipe($.if(dev, $.sourcemaps.write()))
     .pipe(gulp.dest('.tmp/styles'))
     .pipe(reload({stream: true}));
 });
@@ -32,9 +32,9 @@ gulp.task('scripts', () => {
   return gulp.src('src/scripts/**/*.js')
     .pipe(cache())
     .pipe($.plumber())
-    //.pipe($.if(dev, $.sourcemaps.init()))
+    .pipe($.if(dev, $.sourcemaps.init()))
     .pipe($.babel())
-    //.pipe($.if(dev, $.sourcemaps.write('.')))
+    .pipe($.if(dev, $.sourcemaps.write('.')))
     .pipe(gulp.dest('.tmp/scripts'))
     .pipe(reload({stream: true}));
 });
@@ -98,7 +98,8 @@ gulp.task('clean_all', del.bind(null, ['.tmp', 'build']));
 gulp.task('pre-html', () => {
   return gulp.src('src/*.html')
     .pipe(rigger())
-    .pipe(gulp.dest('.tmp'));
+    .pipe(gulp.dest('.tmp'))
+    .pipe(reload({stream: true}));
 });
 
 gulp.task('serve', () => {
@@ -112,16 +113,21 @@ gulp.task('serve', () => {
       }
     });
 
-    gulp.watch([
-      'src/*.html',
-      'src/images/**/*',
-      '.tmp/fonts/**/*'
-    ]).on('change', reload);
+    // gulp.watch([
+    //   'src/*.html',
+    //   'src/images/**/*',
+    //   '.tmp/fonts/**/*'
+    // ]).on('change', reload);
 
-    gulp.watch('src/styles/**/*.scss', ['styles']);
-    gulp.watch('src/scripts/**/*.js', ['scripts']);
-    gulp.watch('src/**/*.html', ['pre-html']);
+    //gulp.watch('src/styles/**/*.scss', ['styles']);
+
+    //gulp.watch('src/scripts/**/*.js', ['scripts']);
+
+   // gulp.watch('src/**/*.html', ['pre-html']);
+
     gulp.watch('src/fonts/**/*', ['fonts']);
+
+
   });
 });
 
