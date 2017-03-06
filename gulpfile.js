@@ -103,7 +103,7 @@ gulp.task('pre-html', () => {
 });
 
 gulp.task('serve', () => {
-  runSequence(['clean'], ['styles', 'scripts', 'fonts', 'pre-html'], () => {
+  runSequence(['clean'], ['styles', 'scripts', 'fonts', 'pre-html', 'watch'], () => {
     browserSync.init({
       notify: false,
       port: 3333,
@@ -125,10 +125,31 @@ gulp.task('serve', () => {
 
    // gulp.watch('src/**/*.html', ['pre-html']);
 
-    gulp.watch('src/fonts/**/*', ['fonts']);
+    //gulp.watch('src/fonts/**/*', ['fonts']);
 
 
   });
+});
+
+gulp.task('watch', function(){
+    gulp.watch('src/styles/**/*.scss', function(event, cb) {
+        gulp.start('styles');
+    });
+    gulp.watch('src/scripts/**/*.js', function(event, cb) {
+        gulp.start('scripts');
+    });
+    gulp.watch('src/**/*.html', function(event, cb) {
+        gulp.start('pre-html');
+    });
+    gulp.watch('src/fonts/**/*', function(event, cb) {
+        gulp.start('fonts');
+    });
+
+    gulp.watch([
+      'src/images/**/*',
+      'src/fonts/**/*'
+    ]).on('change', browserSync.reload);
+
 });
 
 gulp.task('build-test', ['build'], () => {
